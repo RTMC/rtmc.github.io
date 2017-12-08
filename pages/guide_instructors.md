@@ -29,6 +29,13 @@ Fill in the needed fields. The repository needs a name at least.
 
 ![New repository](../../resources/creating_repo_2.png)
 
+And here it is, an empty repository. Now you can begin adding exerises.
+
+![New repository](../../resources/empty_repository.png)
+
+
+##
+
 # Rstudio
 
 To use RTMC, you'll need Rstudio IDE. You can find it
