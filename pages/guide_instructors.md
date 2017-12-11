@@ -39,24 +39,26 @@ Your repository should be structured something like this:
 
 - *ROOT*
     - `Week1`
-        - `R`
-            - `arithmetic.R`
-        - `src`
-            - `empty.txt`
-        - `tests`
-            - `testthat`
-                - `testArithmetic.R`
-                - `testArithmeticHidden.R`
+        - `01_some_exercise`
+            - `R`
+                - `arithmetic.R`
+            - `src`
+                - `empty.txt`
+            - `tests`
+                - `testthat`
+                    - `testArithmetic.R`
+                    - `testArithmeticHidden.R`
+        - `02_some_other-exercise`
+            - `R`
+                - `matrices.R`
+            - `src`
+                - `empty.txt`
+            - `tests`
+                - `testthat`
+                    - `testMatrices.R`
     - `Week2`
-        - `R`
-            - `matrices.R`
-        - `src`
-            - `empty.txt`
-        - `tests`
-            - `testthat`
-                - `testMatrices.R`
 
-The root of the repository has directories for each week as subdirectories. In each of these weeks, you should include three separate directories:
+The root of the repository has directories for each exercise as subdirectories. In each of these directories, you should include three separate directories:
 
 1. `R`:
     - This is where the code that the students can edit goes. You can have the student write the whole file or simply parts of the file.
