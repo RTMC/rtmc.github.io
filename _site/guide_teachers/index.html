@@ -112,40 +112,85 @@
 
 <p><img src="../../resources/empty_repository.png" alt="New repository" /></p>
 
-<h2 id="structure-of-the-exercise-folder">Structure of the exercise folder</h2>
+<h2 id="structure-of-the-repository">Structure of the repository</h2>
+
+<p>Your repository should be structured something like this:</p>
 
 <ul>
-  <li>Week1
+  <li><em>ROOT</em>
     <ul>
-      <li>R
+      <li><code class="highlighter-rouge">Week1</code>
         <ul>
-          <li>arithmetic.R</li>
+          <li><code class="highlighter-rouge">R</code>
+            <ul>
+              <li><code class="highlighter-rouge">arithmetic.R</code></li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">src</code>
+            <ul>
+              <li><code class="highlighter-rouge">empty.txt</code></li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">tests</code>
+            <ul>
+              <li><code class="highlighter-rouge">testthat</code>
+                <ul>
+                  <li><code class="highlighter-rouge">testArithmetic.R</code></li>
+                  <li><code class="highlighter-rouge">testArithmeticHidden.R</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
         </ul>
       </li>
-      <li>src</li>
-      <li>tests
+      <li><code class="highlighter-rouge">Week2</code>
         <ul>
-          <li>testthat
+          <li><code class="highlighter-rouge">R</code>
             <ul>
-              <li>testArithmetic.R</li>
+              <li><code class="highlighter-rouge">matrices.R</code></li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">src</code>
+            <ul>
+              <li><code class="highlighter-rouge">empty.txt</code></li>
+            </ul>
+          </li>
+          <li><code class="highlighter-rouge">tests</code>
+            <ul>
+              <li><code class="highlighter-rouge">testthat</code>
+                <ul>
+                  <li><code class="highlighter-rouge">testMatrices.R</code></li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
       </li>
     </ul>
   </li>
-  <li>Week2
+</ul>
+
+<p>The root of the repository has directories for each week as subdirectories. In each of these weeks, you should include three separate directories:</p>
+
+<ol>
+  <li><code class="highlighter-rouge">R</code>:
     <ul>
-      <li>R</li>
-      <li>src</li>
-      <li>tests
-        <ul>
-          <li>testthat</li>
-        </ul>
-      </li>
+      <li>This is where the code that the students can edit goes. You can have the student write the whole file or simply parts of the file.</li>
     </ul>
   </li>
-</ul>
+  <li><code class="highlighter-rouge">src</code>:
+    <ul>
+      <li>This is a dummy directory that exists for a technical reason.</li>
+      <li>You should include an empty text file “empty.txt” in this folder</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">test</code>:
+    <ul>
+      <li><code class="highlighter-rouge">test</code>-folder has a subfolder, <code class="highlighter-rouge">testthat</code>, where the test-files go. In these files, you can include test that check whether the student has written correct code in the <code class="highlighter-rouge">R</code>-folder. <em>If the student file is called somename.R, the test file should be named testSomename.R</em>. That is, you should name the corresponding test file by prepending “test” to the name of the student file and capitalizing the first letter of the student file.</li>
+      <li>If you want to create a hiddent test file that the students can’t see, append “Hidden” to the end of the file name. Say that you want to create a hidden test file for the student file <code class="highlighter-rouge">matrices.R</code>. This should be named <code class="highlighter-rouge">testMatricesHidden.R</code>.</li>
+    </ul>
+  </li>
+</ol>
 
   </div>
 
