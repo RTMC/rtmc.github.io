@@ -66,3 +66,10 @@ The root of the repository has directories for each week as subdirectories. In e
 3. `test`:
     - `test`-folder has a subfolder, `testthat`, where the test-files go. In these files, you can include test that check whether the student has written correct code in the `R`-folder. *If the student file is called somename.R, the test file should be named testSomename.R*. That is, you should name the corresponding test file by prepending "test" to the name of the student file and capitalizing the first letter of the student file.
     - If you want to create a hiddent test file that the students can't see, append "Hidden" to the end of the file name. Say that you want to create a hidden test file for the student file `matrices.R`. This should be named `testMatricesHidden.R`.
+
+## Adding your repository to TMC servers
+
+After creating your repository with the skeleton presented above, you can add
+it to TMC servers. To this end, follow the steps in item [1.2 in this material](http://testmycode-usermanual.github.io/usermanual/customcourse.html#creating_a_course)
+
+## Writing tests
