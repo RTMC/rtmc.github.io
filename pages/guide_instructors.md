@@ -39,24 +39,26 @@ Your repository should be structured something like this:
 
 - *ROOT*
     - `Week1`
-        - `R`
-            - `arithmetic.R`
-        - `src`
-            - `empty.txt`
-        - `tests`
-            - `testthat`
-                - `testArithmetic.R`
-                - `testArithmeticHidden.R`
+        - `01_some_exercise`
+            - `R`
+                - `arithmetic.R`
+            - `src`
+                - `empty.txt`
+            - `tests`
+                - `testthat`
+                    - `testArithmetic.R`
+                    - `testArithmeticHidden.R`
+        - `02_some_other-exercise`
+            - `R`
+                - `matrices.R`
+            - `src`
+                - `empty.txt`
+            - `tests`
+                - `testthat`
+                    - `testMatrices.R`
     - `Week2`
-        - `R`
-            - `matrices.R`
-        - `src`
-            - `empty.txt`
-        - `tests`
-            - `testthat`
-                - `testMatrices.R`
 
-The root of the repository has directories for each week as subdirectories. In each of these weeks, you should include three separate directories:
+The root of the repository has directories for each exercise as subdirectories. In each of these directories, you should include three separate directories:
 
 1. `R`:
     - This is where the code that the students can edit goes. You can have the student write the whole file or simply parts of the file.
@@ -66,3 +68,14 @@ The root of the repository has directories for each week as subdirectories. In e
 3. `test`:
     - `test`-folder has a subfolder, `testthat`, where the test-files go. In these files, you can include test that check whether the student has written correct code in the `R`-folder. *If the student file is called somename.R, the test file should be named testSomename.R*. That is, you should name the corresponding test file by prepending "test" to the name of the student file and capitalizing the first letter of the student file.
     - If you want to create a hiddent test file that the students can't see, append "Hidden" to the end of the file name. Say that you want to create a hidden test file for the student file `matrices.R`. This should be named `testMatricesHidden.R`.
+
+## Adding your repository to TMC servers
+
+After creating your repository with the skeleton presented above, you can add
+it to TMC servers. To this end, follow the steps in item [1.2 in this material](http://testmycode-usermanual.github.io/usermanual/customcourse.html#creating_a_course)
+
+## Writing tests
+
+The tests should be written in the folder `tests/testthat`. Suppose you  have a *student source file* `vectors.R` where the student is instructed to create a vector containing all integers from 8 to 800 by interval of 8 (that is, the integers 8, 16, 24, ..., 792, 800).
+
+To test this, create a test file `tests/testthat/testVectors.R`.
