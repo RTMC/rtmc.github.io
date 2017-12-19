@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Guide for students
-permalink: /guide_students/
+title: Lol
+permalink: /testi/
 lang: en
 categories:
     - en
