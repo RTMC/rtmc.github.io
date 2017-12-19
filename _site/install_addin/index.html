@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>About</title>
+  <title>Installing the addin</title>
   <meta name="description" content="This site contains information of how to use the Test my code -addin for RStudio.">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/about/">
+  <link rel="canonical" href="http://localhost:4000/install_addin/">
   <link rel="alternate" type="application/rss+xml" title="RTMC" href="/feed.xml">
   
   
@@ -87,16 +87,51 @@
         <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title">About</h1>
+    <h1 class="post-title">Installing the addin</h1>
   </header>
 
   <div class="post-content">
-    <p>Rstudio + TMC = RTMC?</p>
+    <h1 id="start-using-rtmc">Start using RTMC</h1>
 
-<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">arr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
-</span><span class="n">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="w">
-</span></code></pre>
-</div>
+<p>This guide will walk you through the first steps of using the test my code -addin for R.</p>
+
+<h2 id="rstudio">Rstudio</h2>
+
+<p>To use RTMC, you’ll need Rstudio IDE. You can find it
+<a href="https://www.rstudio.com/products/RStudio/">here</a>.</p>
+
+<p>Download the desktop version of the software for the operation system of your choice and install it.</p>
+
+<h2 id="installing-the-addin">Installing the addin</h2>
+
+<p>After installing Rstudio, you’ll have to manually install the addin.</p>
+
+<p>To do this, first open <em>RStudio</em>. There type the following command on the console</p>
+
+<pre><code class="language-{r}">install.packages("devtools")
+</code></pre>
+
+<p>After installing <em>devtools</em>, you can install the programs needed for the addin.</p>
+
+<p>First, install <a href="https://github.com/RTMC/tmc-r-tester">tmc-r-tester</a> with the command</p>
+
+<pre><code class="language-{r}">devtools::install_github("rtmc/tmc-r-tester/tmcrtestrunner")
+</code></pre>
+
+<p>After that, install <a href="https://github.com/RTMC/tmc-rstudio">tmc-rstudio</a> with the command</p>
+
+<pre><code class="language-{r}">devtools::install_github("rtmc/tmc-rstudio/tmcrstudioaddin")
+</code></pre>
+
+<p>Now you should have everything you need to use the addin.</p>
+
+<h2 id="using-the-addin">Using the addin</h2>
+
+<p>After you have installed the addin, it should be able to find it in the toolbar</p>
+
+<p><img src="../../resources/addin_toolbar.png" alt="Addin in the toolbar" /></p>
+
+<p>Clicking this text opens the addin.</p>
 
   </div>
 

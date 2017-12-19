@@ -1,2 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-12-19T14:23:10+02:00</updated><id>/</id><title type="html">RTMC</title><subtitle>This site contains information of how to use the Test my code -addin for RStudio.
-</subtitle></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-12-19T15:08:42+02:00</updated><id>http://localhost:4000/</id><title type="html">RTMC</title><subtitle>This site contains information of how to use the Test my code -addin for RStudio.
+</subtitle><entry><title type="html">RTMC</title><link href="http://localhost:4000/jekyll/update/2017/12/19/rtmc.html" rel="alternate" type="text/html" title="RTMC" /><published>2017-12-19T14:50:00+02:00</published><updated>2017-12-19T14:50:00+02:00</updated><id>http://localhost:4000/jekyll/update/2017/12/19/rtmc</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/12/19/rtmc.html">&lt;p&gt;This is the instruction page of RTMC-project, designed to allow automated testing for courses with R-programming language.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/RTMC/tmc-r-tester&quot;&gt;tmc-r-tester&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/RTMC/tmc-rstudio&quot;&gt;tmc-rstudio&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/RTMC/tmc-rstudio/wiki&quot;&gt;Addin-wiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">This is the instruction page of RTMC-project, designed to allow automated testing for courses with R-programming language.</summary></entry></feed>
