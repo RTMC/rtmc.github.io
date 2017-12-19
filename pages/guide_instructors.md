@@ -115,3 +115,84 @@ test("7c", c("r7.2"), {
 })
 ```
 * `expect_equal`-function allows you to check whether two variables have the same value. From [testthat-documentation](https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf) you can read more about these `expect_`-functions. If all `expect_`-functions inside a `test`-function passes, the the student is given the point given as a parameter in the function call.
+
+### Hidden tests
+
+As mentioned above, if you want to have hidden tests for the exercise, include the string "Hidden" anywhere in the name of the test file. So if you want to test the file `matrices.R`, you should have a test called `testMatricesHidden.R` in the folder `tests/testthat`.
+
+### Mocking functions
+
+Testing R might be tricky in some cases where the student is instructed to use functions like `plot`, `paste`, `rnorm` that do not create any testable object or create objects that are inherently random and as such difficult to test.
+
+Luckily, with RTMC you can circumvent these problems by creating mock functions in the test environment. When the student uses, say, `plot`-function, the function that is called is the standard `plot`-function for R. However, when the tests are run, these functions can be overriden and their parameters can be collected, allowing you to test if the student has used the correct parameter values when calling the function.
+
+To do this, you should include a file called `mock.R` in the folder `tests/testthat`. This file could look like this:
+
+```{r}
+#In this file, the teacher can override R functions so that she/he can
+#test whether the student has used some function (and maybe with the correct
+#arguments)
+
+used_plot_args <- list()
+used_paste_args <- list()
+
+plot <- function(x, y, ...) {
+    params <- list(x = x, y = y, ...)
+
+    # Assigning to environment before this function call:
+    env_parent <- parent.frame()
+    env_parent$used_plot_args[[length(used_plot_args) + 1]] <- params
+
+    graphics::plot(x = x,y = y, ...)
+
+    if (file.exists("Rplots.pdf")) {
+      file.remove("Rplots.pdf")
+    }
+}
+
+used_paste_args <- list()
+
+paste0 <- function(...) {
+    params <- list(...)
+
+    # Assigning to environment before this function call:
+    env_parent <- parent.frame()
+    env_parent$used_paste_args[[length(used_paste_args) + 1]] <- params
+
+    base::paste0(...)
+}
+```
+
+This file is sourced before any tests are run, so you can override some of the functions that the student might use. For example, in the passage
+
+```{r}
+used_plot_args <- list()
+
+plot <- function(x, y, ...) {
+    params <- list(x = x, y = y, ...)
+
+    # Assigning to environment before this function call:
+    env_parent <- parent.frame()
+    env_parent$used_plot_args[[length(used_plot_args) + 1]] <- params
+
+    graphics::plot(x = x,y = y, ...)
+
+    if (file.exists("Rplots.pdf")) {
+      file.remove("Rplots.pdf")
+    }
+}
+```
+
+we first create a list of function call parameters `used_plot_args`. After that, we override the plot function, collect the arguments used to construct the plot, and finally call the `plot`-function.
+
+Now you can test if the student has use the correct arguments when calling `plot`. Your test file might have lines like these:
+
+```{r}
+expect_equal(used_plot_args[[1]]$x, seq(0,10, by = .1))
+expect_equal(used_plot_args[[1]]$y, sin(seq(0,10,by=.1)))
+expect_equal(used_plot_args[[1]]$main, "sin x")
+```
+
+These expectations pass if the student has called plot with `plot(x = seq(0, 10, by = .1), y = sin(seq(0, 10, by = .1), main = "sin x"))`.
+
+You can mock any function following this template.

@@ -10,7 +10,7 @@
   <meta name="description" content="This site contains information of how to use the Test my code -addin for RStudio.">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/guide_teachers/">
+  <link rel="canonical" href="/guide_teachers/">
   <link rel="alternate" type="application/rss+xml" title="RTMC" href="/feed.xml">
   
   
@@ -203,6 +203,125 @@
 it to TMC servers. To this end, follow the steps in item <a href="http://testmycode-usermanual.github.io/usermanual/customcourse.html#creating_a_course">1.2 in this material</a></p>
 
 <h2 id="writing-tests">Writing tests</h2>
+
+<p>The tests should be written in the folder <code class="highlighter-rouge">tests/testthat</code>. Suppose you  have a <em>student source file</em> <code class="highlighter-rouge">vectors.R</code> where the student is instructed to create a vector containing all integers from 8 to 800 by interval of 8 (that is, the integers 8, 16, 24, …, 792, 800).</p>
+
+<p>To test this, create a test file <code class="highlighter-rouge">tests/testthat/testVectors.R</code>. Below is an example of how this file could look like:</p>
+
+<pre><code class="language-{r}">
+library('testthat')
+
+points_for_all_tests("r7")
+
+test("7b", "r7.1", {
+  expected_v1 &lt;- c(8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128,
+                   136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232,
+                   240, 248, 256, 264, 272, 280, 288, 296, 304, 312, 320, 328, 336,
+                   344, 352, 360, 368, 376, 384, 392, 400, 408, 416, 424, 432, 440,
+                   448, 456, 464, 472, 480, 488, 496, 504, 512, 520, 528, 536, 544,
+                   552, 560, 568, 576, 584, 592, 600, 608, 616, 624, 632, 640, 648,
+                   656, 664, 672, 680, 688, 696, 704, 712, 720, 728, 736, 744, 752,
+                   760, 768, 776, 784, 792, 800)
+
+  expect_equal(v1, expected_v1)
+})
+
+test("7c", c("r7.2"), {
+  expect_equal(pituus, 24)
+})
+</code></pre>
+
+<p>There are a few important things to note in this test file:</p>
+
+<ul>
+  <li>include the line <code class="highlighter-rouge">library('testthat')</code> at the beginning of your test file.</li>
+  <li>Determine the points that the student from solving the exercise problems using the function <code class="highlighter-rouge">points_for_all_tests("r1")</code>. It doesn’t really matter what your points are called, as long as they are unique. For example, you could use names <em>a1, a2, a3,…</em> or <em>ex1, ex2, ex3…</em> for the points.</li>
+  <li>You can tests students code with the <code class="highlighter-rouge">test</code>-function. Test function works almost exactly like <code class="highlighter-rouge">test_that</code>-function from the <a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf">testthat-library</a>, but it allows you to pass the points corresponding to the test as parameter. For example, in the following snippet, the corresponding points are given as a parameter <code class="highlighter-rouge">c("r7.2")</code>.
+    <pre><code class="language-{r}">test("7c", c("r7.2"), {
+  expect_equal(pituus, 24)
+})
+</code></pre>
+  </li>
+  <li><code class="highlighter-rouge">expect_equal</code>-function allows you to check whether two variables have the same value. From <a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf">testthat-documentation</a> you can read more about these <code class="highlighter-rouge">expect_</code>-functions. If all <code class="highlighter-rouge">expect_</code>-functions inside a <code class="highlighter-rouge">test</code>-function passes, the the student is given the point given as a parameter in the function call.</li>
+</ul>
+
+<h3 id="hidden-tests">Hidden tests</h3>
+
+<p>As mentioned above, if you want to have hidden tests for the exercise, include the string “Hidden” anywhere in the name of the test file. So if you want to test the file <code class="highlighter-rouge">matrices.R</code>, you should have a test called <code class="highlighter-rouge">testMatricesHidden.R</code> in the folder <code class="highlighter-rouge">tests/testthat</code>.</p>
+
+<h3 id="mocking-functions">Mocking functions</h3>
+
+<p>Testing R might be tricky in some cases where the student is instructed to use functions like <code class="highlighter-rouge">plot</code>, <code class="highlighter-rouge">paste</code>, <code class="highlighter-rouge">rnorm</code> that do not create any testable object or create objects that are inherently random and as such difficult to test.</p>
+
+<p>Luckily, with RTMC you can circumvent these problems by creating mock functions in the test environment. When the student uses, say, <code class="highlighter-rouge">plot</code>-function, the function that is called is the standard <code class="highlighter-rouge">plot</code>-function for R. However, when the tests are run, these functions can be overriden and their parameters can be collected, allowing you to test if the student has used the correct parameter values when calling the function.</p>
+
+<p>To do this, you should include a file called <code class="highlighter-rouge">mock.R</code> in the folder <code class="highlighter-rouge">tests/testthat</code>. This file could look like this:</p>
+
+<pre><code class="language-{r}">#In this file, the teacher can override R functions so that she/he can
+#test whether the student has used some function (and maybe with the correct
+#arguments)
+
+used_plot_args &lt;- list()
+used_paste_args &lt;- list()
+
+plot &lt;- function(x, y, ...) {
+    params &lt;- list(x = x, y = y, ...)
+
+    # Assigning to environment before this function call:
+    env_parent &lt;- parent.frame()
+    env_parent$used_plot_args[[length(used_plot_args) + 1]] &lt;- params
+
+    graphics::plot(x = x,y = y, ...)
+
+    if (file.exists("Rplots.pdf")) {
+      file.remove("Rplots.pdf")
+    }
+}
+
+used_paste_args &lt;- list()
+
+paste0 &lt;- function(...) {
+    params &lt;- list(...)
+
+    # Assigning to environment before this function call:
+    env_parent &lt;- parent.frame()
+    env_parent$used_paste_args[[length(used_paste_args) + 1]] &lt;- params
+
+    base::paste0(...)
+}
+</code></pre>
+
+<p>This file is sourced before any tests are run, so you can override some of the functions that the student might use. For example, in the passage</p>
+
+<pre><code class="language-{r}">used_plot_args &lt;- list()
+
+plot &lt;- function(x, y, ...) {
+    params &lt;- list(x = x, y = y, ...)
+
+    # Assigning to environment before this function call:
+    env_parent &lt;- parent.frame()
+    env_parent$used_plot_args[[length(used_plot_args) + 1]] &lt;- params
+
+    graphics::plot(x = x,y = y, ...)
+
+    if (file.exists("Rplots.pdf")) {
+      file.remove("Rplots.pdf")
+    }
+}
+</code></pre>
+
+<p>we first create a list of function call parameters <code class="highlighter-rouge">used_plot_args</code>. After that, we override the plot function, collect the arguments used to construct the plot, and finally call the <code class="highlighter-rouge">plot</code>-function.</p>
+
+<p>Now you can test if the student has use the correct arguments when calling <code class="highlighter-rouge">plot</code>. Your test file might have lines like these:</p>
+
+<pre><code class="language-{r}">expect_equal(used_plot_args[[1]]$x, seq(0,10, by = .1))
+expect_equal(used_plot_args[[1]]$y, sin(seq(0,10,by=.1)))
+expect_equal(used_plot_args[[1]]$main, "sin x")
+</code></pre>
+
+<p>These expectations pass if the student has called plot with <code class="highlighter-rouge">plot(x = seq(0, 10, by = .1), y = sin(seq(0, 10, by = .1), main = "sin x"))</code>.</p>
+
+<p>You can mock any function following this template.</p>
 
   </div>
 
