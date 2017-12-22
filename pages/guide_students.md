@@ -47,8 +47,16 @@ Now you should have everything you need to use the addin.
 
 ## Using the addin
 
-After you have installed the addin, it should be able to find it in the toolbar
+After you have installed the addin, it should have appeared in the toolbar under Addins
 
 ![Addin in the toolbar](../../resources/addin_toolbar.png)
 
 Clicking this text opens the addin. 
+
+You can now log in with your tmc username and password. You can also change the server if you wish to use a server other than https://tmc.mooc.fi.
+
+After logging in you are able to download exercises in the "Exercises" tab. First select the organization responsible for your course, for example Helsingin Yliopisto. After this, select the course. Now you should see listed every exercise from the course that you have not yet downloaded, but are downloadable. Select as many as you wish, or everything with the "Download all exercises"-checkbox. Then press "Download exercises".
+
+Finally you can move on to the "Test & Submit" tab. First you can open an exercise you have downloaded. After opening, you can do one of three things. You can run your code with the "Source" button, as RStudio blocks the console when an addin is in use. You can also run test locally with "Run tests", or submit your code to the server for evaluation. Only the last one will grant you points, if the automatic tests associated with the exercise pass on the server. If they do not pass, you can see what went wrong with any individual test with "Toggle details".
+
+This concludes the basic usage of the addin. If you wish to manually inspect your exercises, you can find a directory "tmcr" under your home folder, and under that folder, "tmcr-projects". All your downloaded exercises are there.
