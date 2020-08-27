@@ -33,7 +33,7 @@ After installing *devtools*, you can install the programs needed for the addin.
 First, install [tmc-r-tester](https://github.com/RTMC/tmc-r-tester) with the command
 
 ```{r}
-devtools::install_github("rtmc/tmc-r-tester/tmcrtestrunner")
+devtools::install_github("rtmc/tmc-r-tester/tmcRtestrunner")
 ```
 
 After that, install [tmc-rstudio](https://github.com/RTMC/tmc-rstudio) with the command
